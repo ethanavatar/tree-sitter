@@ -148,7 +148,9 @@ fn addParser(b: *std.Build, lib: *std.Build.Step.Compile, comptime lang: []const
 }
 
 fn exists(b: *std.Build, path: []const u8) bool {
-    std.fs.cwd().access(b.pathFromRoot(path), .{ .mode = .read_only }) catch return false;
+    std.fs.cwd().access(b.pathFromRoot(path), .{
+        .read = true,
+    }) catch return false;
     return true;
 }
 
